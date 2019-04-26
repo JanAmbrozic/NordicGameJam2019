@@ -9,14 +9,14 @@
 /**
  * Overrides Cocos InputManager's _registerKeyboardEvent function in order to not stop propagation on keydown/up events.
  */
-// _cc.inputManager._registerKeyboardEvent = function () { // eslint-disable-line no-underscore-dangle
-//     cc.game.canvas.addEventListener('keydown', (e) => {
-//         cc.systemEvent.dispatchEvent(new cc.Event.EventKeyboard(e.keyCode, true));
-//     }, false);
-//     cc.game.canvas.addEventListener('keyup', (e) => {
-//         cc.systemEvent.dispatchEvent(new cc.Event.EventKeyboard(e.keyCode, false));
-//     }, false);
-// };
+_cc.inputManager._registerKeyboardEvent = function () { // eslint-disable-line no-underscore-dangle
+    cc.game.canvas.addEventListener('keydown', (e) => {
+        cc.systemEvent.dispatchEvent(new cc.Event.EventKeyboard(e.keyCode, true));
+    }, false);
+    cc.game.canvas.addEventListener('keyup', (e) => {
+        cc.systemEvent.dispatchEvent(new cc.Event.EventKeyboard(e.keyCode, false));
+    }, false);
+};
 
 /**
  * Overrides ContainerStrategy._setupContainer with minimal code changes. The only change is the conversion from `Math.min` to `Math.max`.

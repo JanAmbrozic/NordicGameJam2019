@@ -13,22 +13,30 @@ cc.Class({
         container: cc.Node,
         characterSprite: cc.Sprite,
         knife: KnifeController,
+        swordColliderNode: cc.Node,
         animation: cc.Animation
-    },
-
-    onCollision () {
-
     },
 
     start () {
         this.isJumping = false;
         this.isRightDirection = true;
         this.hasKnife = false;
-        this.hasSword = true;
+        this.hasSword = false;
 
         this.speed = 1400;
         this.jumpSpeed = 700;
         this._changeState(State.IDLE);
+    },
+
+    onCollisionEnter (other) {
+        switch(other.tag) {
+            case 1:
+                this.getKnife(other.node);
+                break;
+            case 2:
+                this.getSword(other.node);
+                break;
+        }
     },
 
     setDirection (direction) {
@@ -53,6 +61,10 @@ cc.Class({
         this._changeState(State.IDLE);
     },
 
+    die () {
+        this._changeState(State.DEAD);
+    },
+
     jump () {
         if (this.isJumping) {
             return;
@@ -62,8 +74,8 @@ cc.Class({
     },
 
     attackSword () {
-        this.isAttack = true;
         if (this.hasSword && (this.state === State.IDLE || this.state === State.RUN)) {
+            this.isAttack = true;
             this.animation.play('hit');
         }
     },
@@ -76,18 +88,26 @@ cc.Class({
         this.attackSword();
     },
 
-    getKnife () {
+    getKnife (knifeNode) {
+        this.knife = knifeNode.getComponent(KnifeController)
+        this.knife.node.group = 'Weapon';
+        this.knife.container.parent = null;
+        this.container.addChild(this.knife.container);
+        this.knife.reset();
+
         this.hasKnife = true;
     },
 
-    getSword () {
+    getSword (swordNode) {
+        swordNode.destroy();
         this.hasSword = true;
     },
 
     attackKnife () {
         if (this.hasKnife && (this.state === State.IDLE || this.state === State.RUN)) {
+            this.hasKnife = false;
+            this.isAttack = true;
             this.animation.play('throw');
-            this.knife.fly(this.isRightDirection);
         }
     },
 
@@ -107,9 +127,21 @@ cc.Class({
         this._changeState(this.state)
     },
 
+    // Callback for knife and sword animation complete
     onAttackComplete () {
         this.isAttack = false;
-        this._changeState(this.state)
+        this.swordColliderNode.active = false;
+        this._changeState(this.state);
+    },
+
+    // Callback when starts the throw frame
+    onThrow () {
+        this.knife.fly(this.isRightDirection);
+    },
+
+    // Callback when starts the sword hit frame
+    onSword () {
+        this.swordColliderNode.active = true;
     },
 
     _changeState (state) {

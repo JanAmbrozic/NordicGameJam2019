@@ -1,39 +1,43 @@
 const State = cc.Enum({
     IDLE: 'idle',
-    FLY: 'jump'
+    FLY: 'fly'
 });
 
 cc.Class({
     extends: cc.Component,
 
     properties: {
+        container: cc.Node
     },
 
-    onCollision () {
-
+    onCollisionEnter (other) {
+        this.state = State.IDLE;
+        if (other.tag !== 3) {
+            this.reset();
+        }
     },
 
     start () {
+        this.speed = 2000;
+    },
 
+    reset () {
+        this.container.setPosition(70, 70);
+        this.container.active = false;
     },
 
     fly (direction) {
-    },
-
-    _changeState (state) {
-        if (this.state === state) {
+        if (this.state === State.FLY) {
             return;
         }
-        this.state === state;
-        switch (state) {
-            case State.FLY:
-                break;
-            case State.IDLE:
-                break;
-        }
+        this.container.active = true;
+        this.state = State.FLY;
+        this.container.scaleX = direction ? 1 : -1;
     },
 
     update (dt) {
-
+        if (this.state === State.FLY) {
+            this.container.x += dt * this.speed * this.container.scaleX;
+        }
     }
 });
