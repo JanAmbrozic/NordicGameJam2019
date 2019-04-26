@@ -14,11 +14,11 @@ cc.Class({
     start () {
         var manager = cc.director.getCollisionManager();
         manager.enabled = true;
-        
+
         this._pressedKeyMap = new Map();
         // add key down and key up event
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
+        cc.game.canvas.addEventListener(cc.SystemEvent.EventType.KEY_DOWN, (event) => this.onKeyDown(event));
+        cc.game.canvas.addEventListener(cc.SystemEvent.EventType.KEY_UP, (event) => this.onKeyUp(event));
     },
 
     onKeyDown (event) {

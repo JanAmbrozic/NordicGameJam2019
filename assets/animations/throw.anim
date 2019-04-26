@@ -77,6 +77,11 @@
   },
   "events": [
     {
+      "frame": 0.1,
+      "func": "onThrow",
+      "params": []
+    },
+    {
       "frame": 0.45,
       "func": "onAttackComplete",
       "params": []
