@@ -44,9 +44,9 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.960296619874648,
-      "y": 0.960296619874648,
-      "z": 0.960296619874648
+      "x": 0.3203125,
+      "y": 0.3203125,
+      "z": 0.3203125
     },
     "_quat": {
       "__type__": "cc.Quat",
@@ -561,7 +561,7 @@
         "__id__": 15
       },
       {
-        "__id__": 21
+        "__id__": 23
       }
     ],
     "_prefab": null,
@@ -580,12 +580,12 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
+      "x": 0,
       "y": 0
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 0,
+      "x": -35,
       "y": 0,
       "z": 0
     },
@@ -688,7 +688,9 @@
     "knife": {
       "__id__": 16
     },
-    "swordColliderNode": null,
+    "swordCollider": {
+      "__id__": 21
+    },
     "animation": {
       "__id__": 14
     },
@@ -887,21 +889,21 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 12
+      "__id__": 22
     },
     "_enabled": true,
     "tag": 0,
     "_offset": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 219.5
+      "y": 0
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 232,
-      "height": 439
+      "width": 20,
+      "height": 50
     },
-    "_id": "abk5iwM0hDZKa5W1yELT0x"
+    "_id": "0564WGMUlNVJm99hXD8Bdi"
   },
   {
     "__type__": "cc.Node",
@@ -915,7 +917,7 @@
     "_level": 3,
     "_components": [
       {
-        "__id__": 23
+        "__id__": 21
       }
     ],
     "_prefab": null,
@@ -968,21 +970,21 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 22
+      "__id__": 12
     },
     "_enabled": true,
     "tag": 0,
     "_offset": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
+      "x": 116,
+      "y": 219.5
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 20,
-      "height": 50
+      "width": 232,
+      "height": 439
     },
-    "_id": "0564WGMUlNVJm99hXD8Bdi"
+    "_id": "abk5iwM0hDZKa5W1yELT0x"
   },
   {
     "__type__": "cc.Node",

@@ -13,7 +13,7 @@ cc.Class({
         container: cc.Node,
         characterSprite: cc.Sprite,
         knife: KnifeController,
-        swordColliderNode: cc.Node,
+        swordCollider: cc.Collider,
         animation: cc.Animation
     },
 
@@ -74,7 +74,7 @@ cc.Class({
     },
 
     attackSword () {
-        if (this.hasSword && (this.state === State.IDLE || this.state === State.RUN)) {
+        if (this.state === State.IDLE || this.state === State.RUN) {
             this.isAttack = true;
             this.animation.play('hit');
         }
@@ -84,8 +84,11 @@ cc.Class({
         if (this.isAttack) {
             return;
         }
-        this.attackKnife();
-        this.attackSword();
+        if (this.hasKnife) {
+            this.attackKnife();
+        } else if (this.hasSword){
+            this.attackSword();
+        }
     },
 
     getKnife (knifeNode) {
@@ -104,7 +107,7 @@ cc.Class({
     },
 
     attackKnife () {
-        if (this.hasKnife && (this.state === State.IDLE || this.state === State.RUN)) {
+        if (this.state === State.IDLE || this.state === State.RUN) {
             this.hasKnife = false;
             this.isAttack = true;
             this.animation.play('throw');
@@ -130,7 +133,7 @@ cc.Class({
     // Callback for knife and sword animation complete
     onAttackComplete () {
         this.isAttack = false;
-        this.swordColliderNode.active = false;
+        this.swordCollider.enabled = false;
         this._changeState(this.state);
     },
 
@@ -141,7 +144,7 @@ cc.Class({
 
     // Callback when starts the sword hit frame
     onSword () {
-        this.swordColliderNode.active = true;
+        this.swordCollider.enabled = true;
     },
 
     _changeState (state) {
