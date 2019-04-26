@@ -1,0 +1,108 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "jump",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.5,
+  "sample": 20,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "fc310fe8-84f2-4eb9-a8db-6ea1b9fc241c"
+            }
+          },
+          {
+            "frame": 0.05,
+            "value": {
+              "__uuid__": "da29c6e6-78de-4738-812f-e7be608e4cb5"
+            }
+          },
+          {
+            "frame": 0.1,
+            "value": {
+              "__uuid__": "547c9146-f608-4566-ae7d-c0400d231ce3"
+            }
+          },
+          {
+            "frame": 0.15,
+            "value": {
+              "__uuid__": "54d54bd3-b4df-4aa3-9bce-8dbdefdf2812"
+            }
+          },
+          {
+            "frame": 0.2,
+            "value": {
+              "__uuid__": "00d08eed-4552-43a7-9050-6fb5d8acbabd"
+            }
+          },
+          {
+            "frame": 0.25,
+            "value": {
+              "__uuid__": "a42397ae-f4e2-4cc4-8905-408f2b1fa852"
+            }
+          },
+          {
+            "frame": 0.3,
+            "value": {
+              "__uuid__": "a42397ae-f4e2-4cc4-8905-408f2b1fa852"
+            }
+          },
+          {
+            "frame": 0.35,
+            "value": {
+              "__uuid__": "ee376feb-5f0c-4891-809c-5e2910d2895d"
+            }
+          },
+          {
+            "frame": 0.4,
+            "value": {
+              "__uuid__": "2c00d7c0-1d60-4922-aac5-8410fbb3f4a7"
+            }
+          },
+          {
+            "frame": 0.45,
+            "value": {
+              "__uuid__": "fa296aa0-b345-4754-a05d-1a1f28826f75"
+            }
+          }
+        ]
+      }
+    },
+    "props": {
+      "y": [
+        {
+          "frame": 0,
+          "value": 0,
+          "curve": "sineOut"
+        },
+        {
+          "frame": 0.15,
+          "value": 300
+        },
+        {
+          "frame": 0.3,
+          "value": 300
+        },
+        {
+          "frame": 0.45,
+          "value": 0
+        }
+      ]
+    }
+  },
+  "events": [
+    {
+      "frame": 0.45,
+      "func": "onJumpComplete",
+      "params": [
+        ""
+      ]
+    }
+  ]
+}
