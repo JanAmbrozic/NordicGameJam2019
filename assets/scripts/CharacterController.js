@@ -69,6 +69,9 @@ cc.Class({
     },
 
     attack () {
+        if (this.isAttack) {
+            return;
+        }
         this.attackKnife();
         this.attackSword();
     },

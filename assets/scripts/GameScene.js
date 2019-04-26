@@ -12,6 +12,9 @@ cc.Class({
     // onLoad () {},
 
     start () {
+        var manager = cc.director.getCollisionManager();
+        manager.enabled = true;
+        
         this._pressedKeyMap = new Map();
         // add key down and key up event
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
@@ -46,17 +49,28 @@ cc.Class({
             case cc.macro.KEY.a:
             case cc.macro.KEY.left:
                 this._pressedKeyMap.set("LEFT", false);
-                this.characterController.idle();
+                if (this._pressedKeyMap.get("RIGHT")) {
+                    this.characterController.setDirection(true);
+                    this.characterController.run();
+                } else {
+                    this.characterController.idle();
+                }
                 break;
             case cc.macro.KEY.d:
             case cc.macro.KEY.right:
                 this._pressedKeyMap.set("RIGHT", false);
-                this.characterController.idle();
+                if (this._pressedKeyMap.get("LEFT")) {
+                    this.characterController.setDirection(false);
+                    this.characterController.run();
+                } else {
+                    this.characterController.idle();
+                }
                 break;
-            case cc.macro.KEY.space:
+            case cc.macro.KEY.w:
+            case cc.macro.KEY.up:
                 this.characterController.jump();
                 break;
-            case cc.macro.KEY.enter:
+            case cc.macro.KEY.space:
                 this.characterController.attack();
                 break;
         }
