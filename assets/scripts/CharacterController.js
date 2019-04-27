@@ -159,6 +159,7 @@ cc.Class({
     // Callback for knife and sword animation complete
     onAttackComplete () {
         this.isAttack = false;
+        this.swordCollider.node.active = false;
         this.swordCollider.enabled = false;
         this._changeState(this.state);
     },
@@ -170,6 +171,7 @@ cc.Class({
 
     // Callback when starts the sword hit frame
     onSword () {
+        this.swordCollider.node.active = true;
         this.swordCollider.enabled = true;
     },
 
