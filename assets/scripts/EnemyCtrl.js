@@ -53,9 +53,11 @@ cc.Class({
     getDirection() {
         if (this.playerNode.x > this.getZombiePosX()) {
             this.zombieNode.scaleX = 1;
+            this.zombieCollider.offset.x = 480;
             return 1;
         } else {
-            this.zombieNode.scaleX = -1;
+            this.zombieNode.scaleX  = -1;
+            this.zombieCollider.offset.x = 200;
             return -1;
         }
     },
