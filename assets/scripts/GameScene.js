@@ -13,6 +13,7 @@ cc.Class({
         zombiePrefab: cc.Prefab,
         knifePrefab: cc.Prefab,
         swordPrefab: cc.Prefab,
+        spikePrefab: cc.Prefab,
         gameNode: cc.Node,
         animation: cc.Animation
     },
@@ -30,6 +31,9 @@ cc.Class({
 
         this.score = 0;
         this.createKnife();
+        this.scheduleOnce(() => {
+            this.createSpike();
+        }, 10);
 
         this.characterController.node.on('die', () => {
             this.restart();
@@ -101,6 +105,29 @@ cc.Class({
         this.knife.x = (Math.random() * cc.view.getVisibleSize().width - cc.view.getVisibleSize().width / 2) * 0.8;
         this.knife.y = Math.random() * cc.view.getVisibleSize().height * 0.5 ;
         this.itemsContainer.addChild(this.knife);
+    },
+
+    createSpike () {
+        this.scheduleOnce(() => {
+            if (this.score > 20) {
+                this.createSpike();
+            }
+            this.createSpike();
+        }, 10);
+        const spike = cc.instantiate(this.spikePrefab);
+        spike.x = (Math.random() * cc.view.getVisibleSize().width - cc.view.getVisibleSize().width / 2) * 0.8;
+        spike.y = -150;
+        this.itemsContainer.addChild(spike);
+        spike.runAction(cc.moveBy(0.5, 0, 100));
+
+        this.scheduleOnce(() => {
+            spike.runAction(cc.sequence(
+                cc.moveBy(0.5, 0, -100),
+                cc.callFunc(() => {
+                    spike.destroy();
+                })
+            ))
+        }, 4);
     },
 
     restart () {
