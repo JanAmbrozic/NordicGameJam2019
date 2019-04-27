@@ -148,15 +148,13 @@ cc.Class({
     },
 
     createEnemy () {
-        const createEnemyCallback = ()=> {
-            this.createEnemy();
-        }
-        this.scheduleOnce(createEnemyCallback, this.enemyInterval);
-
-        if (this.score < 30 && this.enemyAmount > 2) {
+        if (this.score < 10 && this.enemyAmount > 0) {
             return;
         }
-        if (this.score < 40 && this.enemyAmount > 3) {
+        if (this.score < 20 && this.enemyAmount > 1) {
+            return;
+        }
+        if (this.score < 30 && this.enemyAmount > 2) {
             return;
         }
         this.enemyAmount ++;
@@ -166,16 +164,20 @@ cc.Class({
         this.enemy.y = 500;
         this.zombieContainer.addChild(this.enemy);
         this.enemy.getComponent(EnemyController).fallDown();
-        if (this.score < 15) {
+        if (this.score < 5) {
+            this.enemy.getComponent(EnemyController).setSpeed(200);
+        } else if (this.score < 15) {
             this.enemy.getComponent(EnemyController).setSpeed(500);
         } else if (this.score < 30) {
             this.enemy.getComponent(EnemyController).setSpeed(700);
         }
         this.enemy.getComponent(EnemyController).setGroundContainer(this.groundContainer);
         this.enemy.on('die', () => {
-            this.enemyAmount --;
-            // this.unschedule(createEnemyCallback);
+            this.enemyAmount--;
             this.createEnemy();
+            this.createEnemy();
+            this.createEnemy();
+
             this.increaseScore();
         });
     },
