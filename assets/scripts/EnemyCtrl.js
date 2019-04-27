@@ -1,3 +1,5 @@
+const BloodController = require('BloodController');
+
 const State = cc.Enum({
     FOLLOW: 'stateFollow',
     IDLE: 'stateIdle',
@@ -101,12 +103,18 @@ cc.Class({
         this.idle();
     },
 
+    setGroundContainer (container) {
+        this.groundContainer = container;
+    },
+
     die() {
         if (this.zombieNode.anchorX !== 0) {
             this.zombieNode.anchorX = 0;
             this.zombieNode.x = this.zombieNode.x - (150 * this.zombieNode.scaleX);
         }
         this.node.emit('die');
+        this.node.getComponent(BloodController).play(this.groundContainer,
+            this.node.x , -this.zombieNode.scaleX)
         this.zombieAnim.play('ZombieDead');
         this.state = State.DEAD;
         this.zombieCollider.enabled = false;

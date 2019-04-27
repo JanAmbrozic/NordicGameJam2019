@@ -89,7 +89,7 @@ cc.Class({
         if (this.state === State.DEAD) {
             return;
         }
-        if (this.isJumping) {
+        if (this.isAttack || this.isJumping) {
             return;
         }
         this.isJumping = true;

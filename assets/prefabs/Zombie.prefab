@@ -38,10 +38,13 @@
       },
       {
         "__id__": 11
+      },
+      {
+        "__id__": 12
       }
     ],
     "_prefab": {
-      "__id__": 12
+      "__id__": 13
     },
     "_opacity": 255,
     "_color": {
@@ -367,6 +370,21 @@
     "_loop": false,
     "playOnLoad": false,
     "preload": false,
+    "_id": ""
+  },
+  {
+    "__type__": "fc1fbDLyNdAhYOQmD/lqa0w",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "minY": -5,
+    "gravity": 2000,
+    "bloodDropPrefab": {
+      "__uuid__": "0fa47ab1-ef22-483c-b334-b06df753c47a"
+    },
     "_id": ""
   },
   {

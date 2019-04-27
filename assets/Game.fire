@@ -44,9 +44,9 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.3015543619791667,
-      "y": 0.3015543619791667,
-      "z": 0.3015543619791667
+      "x": 0.19365383870768682,
+      "y": 0.19365383870768682,
+      "z": 0.19365383870768682
     },
     "_quat": {
       "__type__": "cc.Quat",
@@ -1081,7 +1081,7 @@
     "_scale": {
       "__type__": "cc.Vec3",
       "x": 1,
-      "y": 5,
+      "y": 1,
       "z": 1
     },
     "_quat": {
@@ -1138,11 +1138,11 @@
     "_enabled": true,
     "alignMode": 1,
     "_target": null,
-    "_alignFlags": 40,
+    "_alignFlags": 44,
     "_left": 0,
     "_right": 0,
     "_top": 0,
-    "_bottom": 0,
+    "_bottom": 1,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
     "_isAbsLeft": true,
@@ -1854,6 +1854,9 @@
     },
     "itemsContainer": {
       "__id__": 29
+    },
+    "groundContainer": {
+      "__id__": 26
     },
     "zombiePrefab": {
       "__uuid__": "e216464d-eb48-49c3-8b22-f367c2e401e5"
