@@ -29,6 +29,10 @@ cc.Class({
         this.zombieIdleAudio.play();
     },
 
+    setSpeed (speed) {
+        this.speed = speed;
+    },
+
     onCollisionEnter (collidedNode) {
         console.log(collidedNode.node.name)
         if(collidedNode.node.name === 'swordCollider' || collidedNode.tag === 1) {

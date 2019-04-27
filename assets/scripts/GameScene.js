@@ -166,10 +166,15 @@ cc.Class({
         this.enemy.y = 500;
         this.zombieContainer.addChild(this.enemy);
         this.enemy.getComponent(EnemyController).fallDown();
+        if (this.score < 15) {
+            this.enemy.getComponent(EnemyController).setSpeed(500);
+        } else if (this.score < 30) {
+            this.enemy.getComponent(EnemyController).setSpeed(700);
+        }
         this.enemy.getComponent(EnemyController).setGroundContainer(this.groundContainer);
         this.enemy.on('die', () => {
             this.enemyAmount --;
-            this.unschedule(createEnemyCallback);
+            // this.unschedule(createEnemyCallback);
             this.createEnemy();
             this.increaseScore();
         });
