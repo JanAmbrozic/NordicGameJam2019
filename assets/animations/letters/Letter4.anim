@@ -1,0 +1,41 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "Letter4",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 1.2,
+  "sample": 10,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "props": {
+      "position": [
+        {
+          "frame": 0.3,
+          "value": [
+            268,
+            -657
+          ],
+          "motionPath": []
+        },
+        {
+          "frame": 0.9,
+          "value": [
+            281,
+            314
+          ],
+          "motionPath": []
+        },
+        {
+          "frame": 1.2,
+          "value": [
+            325,
+            46
+          ],
+          "motionPath": []
+        }
+      ]
+    }
+  },
+  "events": []
+}

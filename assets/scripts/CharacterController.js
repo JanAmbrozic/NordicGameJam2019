@@ -19,7 +19,8 @@ cc.Class({
     start () {
         this.isJumping = false;
         this.isRightDirection = true;
-        this.hasKnife = false;
+        this.knifeAmount = 0;
+        this.knivesList = [];
         this.hasSword = true;
 
         this.screenWidth = cc.view.getVisibleSize().width;
@@ -75,7 +76,7 @@ cc.Class({
     },
 
     die () {
-        if (this.state === State.DEAD) {
+        if ( this.state === State.DEAD) {
             return;
         }
         this.node.emit('die');
@@ -107,7 +108,7 @@ cc.Class({
         if (this.isAttack || this.isJumping) {
             return;
         }
-        if (this.hasKnife) {
+        if (this.knivesList.length > 0) {
             this._attackKnife();
         } else if (this.hasSword){
             this._attackSword();
@@ -118,10 +119,12 @@ cc.Class({
         this.knife = knifeNode.getComponent(KnifeController)
         this.knife.node.group = 'Weapon';
         this.knife.container.parent = null;
+        this.knife.container.angle = 0;
         this.container.addChild(this.knife.container);
         this.knife.reset();
 
-        this.hasKnife = true;
+        this.knivesList.push(this.knife);
+        this.node.emit('updateKnife', this.knivesList.length);
     },
 
     _getSword (swordNode) {
@@ -131,7 +134,8 @@ cc.Class({
 
     _attackKnife () {
         if (this.state === State.IDLE || this.state === State.RUN) {
-            this.hasKnife = false;
+            this.knife = this.knivesList.shift();
+            this.node.emit('updateKnife', this.knivesList.length);
             this.isAttack = true;
             this.animation.play('throw');
         }
@@ -158,7 +162,11 @@ cc.Class({
 
     onJumpComplete () {
         this.isJumping = false;
-        this._changeState(this.state)
+        if (this.state === State.DEAD) {
+            this.animation.play('dead');
+        } else {
+            this._changeState(this.state)
+        }
     },
 
     // Callback for knife and sword animation complete
@@ -199,7 +207,9 @@ cc.Class({
                 }
                 break;
             case State.DEAD:
-                this.animation.play('dead');
+                if (!this.isJumping) {
+                    this.animation.play('dead');
+                }
                 break;
         }
     }
