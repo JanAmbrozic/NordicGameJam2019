@@ -29,17 +29,24 @@ cc.Class({
     },
 
     onCollisionEnter (other) {
+        if (other.node.group === 'Enemy') {
+            this.die();
+            return;
+        }
         switch(other.tag) {
             case 1:
-                this.getKnife(other.node);
+                this._getKnife(other.node);
                 break;
             case 2:
-                this.getSword(other.node);
+                this._getSword(other.node);
                 break;
         }
     },
 
     setDirection (direction) {
+        if (this.state === State.DEAD) {
+            return;
+        }
         if (this.isRightDirection === direction) {
             return;
         }
@@ -52,20 +59,32 @@ cc.Class({
     },
 
     run () {
+        if (this.state === State.DEAD) {
+            return;
+        }
         if (this.state === State.IDLE) {
             this._changeState(State.RUN);
         }
     },
 
     idle () {
+        if (this.state === State.DEAD) {
+            return;
+        }
         this._changeState(State.IDLE);
     },
 
     die () {
+        if (this.state === State.DEAD) {
+            return;
+        }
         this._changeState(State.DEAD);
     },
 
     jump () {
+        if (this.state === State.DEAD) {
+            return;
+        }
         if (this.isJumping) {
             return;
         }
@@ -73,7 +92,7 @@ cc.Class({
         this.animation.play('jump');
     },
 
-    attackSword () {
+    _attackSword () {
         if (this.state === State.IDLE || this.state === State.RUN) {
             this.isAttack = true;
             this.animation.play('hit');
@@ -81,17 +100,20 @@ cc.Class({
     },
 
     attack () {
-        if (this.isAttack) {
+        if (this.state === State.DEAD) {
+            return;
+        }
+        if (this.isAttack && this.isJumping) {
             return;
         }
         if (this.hasKnife) {
-            this.attackKnife();
+            this._attackKnife();
         } else if (this.hasSword){
-            this.attackSword();
+            this._attackSword();
         }
     },
 
-    getKnife (knifeNode) {
+    _getKnife (knifeNode) {
         this.knife = knifeNode.getComponent(KnifeController)
         this.knife.node.group = 'Weapon';
         this.knife.container.parent = null;
@@ -101,12 +123,12 @@ cc.Class({
         this.hasKnife = true;
     },
 
-    getSword (swordNode) {
+    _getSword (swordNode) {
         swordNode.destroy();
         this.hasSword = true;
     },
 
-    attackKnife () {
+    _attackKnife () {
         if (this.state === State.IDLE || this.state === State.RUN) {
             this.hasKnife = false;
             this.isAttack = true;
@@ -115,6 +137,9 @@ cc.Class({
     },
 
     update (dt) {
+        if (this.state === State.DEAD) {
+            return;
+        }
         if (this.state === State.RUN && !this.isAttack) {
             if (this.isJumping) {
                 this.container.x += dt * this.jumpSpeed * this.container.scaleX;
@@ -139,7 +164,7 @@ cc.Class({
 
     // Callback when starts the throw frame
     onThrow () {
-        this.knife.fly(this.isRightDirection);
+        this.knife.fly();
     },
 
     // Callback when starts the sword hit frame
