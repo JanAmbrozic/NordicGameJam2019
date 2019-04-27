@@ -17,7 +17,7 @@
         "__id__": 2
       },
       {
-        "__id__": 42
+        "__id__": 34
       }
     ],
     "_active": false,
@@ -44,9 +44,9 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.3203125,
-      "y": 0.3203125,
-      "z": 0.3203125
+      "x": 0.29855567665939087,
+      "y": 0.29855567665939087,
+      "z": 0.29855567665939087
     },
     "_quat": {
       "__type__": "cc.Quat",
@@ -82,23 +82,17 @@
         "__id__": 17
       },
       {
-        "__id__": 30
+        "__id__": 25
       },
       {
-        "__id__": 24
-      },
-      {
-        "__id__": 33
-      },
-      {
-        "__id__": 36
+        "__id__": 28
       }
     ],
     "_active": true,
     "_level": 1,
     "_components": [
       {
-        "__id__": 41
+        "__id__": 33
       }
     ],
     "_prefab": null,
@@ -727,7 +721,7 @@
         "__id__": 18
       },
       {
-        "__id__": 28
+        "__id__": 23
       }
     ],
     "_active": true,
@@ -799,7 +793,7 @@
         "__id__": 21
       },
       {
-        "__id__": 29
+        "__id__": 24
       }
     ],
     "_prefab": null,
@@ -923,11 +917,8 @@
     "characterSprite": {
       "__id__": 19
     },
-    "knife": {
-      "__id__": 22
-    },
     "swordCollider": {
-      "__id__": 27
+      "__id__": 22
     },
     "animation": {
       "__id__": 20
@@ -935,199 +926,11 @@
     "_id": "5awyvwwAZJpKOuuHAhXQou"
   },
   {
-    "__type__": "ed6d2qOsllI2LgnKjKNC6KQ",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 23
-    },
-    "_enabled": true,
-    "container": {
-      "__id__": 24
-    },
-    "_id": "0dNfD/Q/xHepSRhx0EvYGs"
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "knife",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 24
-    },
-    "_children": [],
-    "_active": true,
-    "_level": 3,
-    "_components": [
-      {
-        "__id__": 25
-      },
-      {
-        "__id__": 22
-      },
-      {
-        "__id__": 26
-      }
-    ],
-    "_prefab": null,
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 32,
-      "height": 160
-    },
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_position": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_scale": {
-      "__type__": "cc.Vec3",
-      "x": 0.3,
-      "y": 0.3,
-      "z": 0.3
-    },
-    "_quat": {
-      "__type__": "cc.Quat",
-      "x": 0,
-      "y": 0,
-      "z": -0.7071067811865475,
-      "w": 0.7071067811865476
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_zIndex": 0,
-    "_is3DNode": false,
-    "groupIndex": 3,
-    "_id": "e20Q95XLpBkL8ZDiML17U9"
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "knifeContainer",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 2
-    },
-    "_children": [
-      {
-        "__id__": 23
-      }
-    ],
-    "_active": true,
-    "_level": 2,
-    "_components": [],
-    "_prefab": null,
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 0,
-      "height": 0
-    },
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_position": {
-      "__type__": "cc.Vec3",
-      "x": -182,
-      "y": -370,
-      "z": 0
-    },
-    "_scale": {
-      "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
-    },
-    "_quat": {
-      "__type__": "cc.Quat",
-      "x": 0,
-      "y": 0,
-      "z": 0,
-      "w": 1
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_zIndex": 0,
-    "_is3DNode": false,
-    "groupIndex": 0,
-    "_id": "bexk0rc+BFY7B1KHHWoRrP"
-  },
-  {
-    "__type__": "cc.Sprite",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 23
-    },
-    "_enabled": true,
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_spriteFrame": {
-      "__uuid__": "4ad4da8e-6bf4-42b9-a149-8f26695deaa8"
-    },
-    "_type": 0,
-    "_sizeMode": 1,
-    "_fillType": 0,
-    "_fillCenter": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_fillStart": 0,
-    "_fillRange": 0,
-    "_isTrimmedMode": true,
-    "_state": 0,
-    "_atlas": null,
-    "_id": "e0NPKnWJlPn4gZvtcANndI"
-  },
-  {
     "__type__": "cc.BoxCollider",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 23
-    },
-    "_enabled": true,
-    "tag": 1,
-    "_offset": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_size": {
-      "__type__": "cc.Size",
-      "width": 32,
-      "height": 160
-    },
-    "_id": "33xx9uC2NKPrs3A9sPMLJz"
-  },
-  {
-    "__type__": "cc.BoxCollider",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 28
     },
     "_enabled": false,
     "tag": 0,
@@ -1155,7 +958,7 @@
     "_level": 3,
     "_components": [
       {
-        "__id__": 27
+        "__id__": 22
       }
     ],
     "_prefab": null,
@@ -1236,10 +1039,10 @@
     "_level": 2,
     "_components": [
       {
-        "__id__": 31
+        "__id__": 26
       },
       {
-        "__id__": 32
+        "__id__": 27
       }
     ],
     "_prefab": null,
@@ -1294,7 +1097,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 30
+      "__id__": 25
     },
     "_enabled": true,
     "_srcBlendFactor": 770,
@@ -1322,7 +1125,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 30
+      "__id__": 25
     },
     "_enabled": true,
     "alignMode": 1,
@@ -1346,118 +1149,6 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "sword",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 2
-    },
-    "_children": [],
-    "_active": true,
-    "_level": 2,
-    "_components": [
-      {
-        "__id__": 34
-      },
-      {
-        "__id__": 35
-      }
-    ],
-    "_prefab": null,
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 32,
-      "height": 160
-    },
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_position": {
-      "__type__": "cc.Vec3",
-      "x": 70,
-      "y": -361,
-      "z": 0
-    },
-    "_scale": {
-      "__type__": "cc.Vec3",
-      "x": 0.6,
-      "y": 1,
-      "z": 1
-    },
-    "_quat": {
-      "__type__": "cc.Quat",
-      "x": 0,
-      "y": 0,
-      "z": 1,
-      "w": 6.123233995736766e-17
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_zIndex": 0,
-    "_is3DNode": false,
-    "groupIndex": 3,
-    "_id": "a2+Yu6YqtORK2xCTCFtjl7"
-  },
-  {
-    "__type__": "cc.Sprite",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 33
-    },
-    "_enabled": true,
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_spriteFrame": {
-      "__uuid__": "4ad4da8e-6bf4-42b9-a149-8f26695deaa8"
-    },
-    "_type": 0,
-    "_sizeMode": 1,
-    "_fillType": 0,
-    "_fillCenter": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_fillStart": 0,
-    "_fillRange": 0,
-    "_isTrimmedMode": true,
-    "_state": 0,
-    "_atlas": null,
-    "_id": "04LABT7ltCrIQibr24U6Rf"
-  },
-  {
-    "__type__": "cc.BoxCollider",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 33
-    },
-    "_enabled": true,
-    "tag": 2,
-    "_offset": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_size": {
-      "__type__": "cc.Size",
-      "width": 32,
-      "height": 160
-    },
-    "_id": "84VY5JiMdE/JOpjk6+sRM7"
-  },
-  {
-    "__type__": "cc.Node",
     "_name": "Score",
     "_objFlags": 0,
     "_parent": {
@@ -1465,10 +1156,10 @@
     },
     "_children": [
       {
-        "__id__": 37
+        "__id__": 29
       },
       {
-        "__id__": 39
+        "__id__": 31
       }
     ],
     "_active": true,
@@ -1524,14 +1215,14 @@
     "_name": "zobieIcon",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 36
+      "__id__": 28
     },
     "_children": [],
     "_active": true,
     "_level": 3,
     "_components": [
       {
-        "__id__": 38
+        "__id__": 30
       }
     ],
     "_prefab": null,
@@ -1586,7 +1277,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 37
+      "__id__": 29
     },
     "_enabled": true,
     "_srcBlendFactor": 770,
@@ -1614,14 +1305,14 @@
     "_name": "scoreLabel",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 36
+      "__id__": 28
     },
     "_children": [],
     "_active": true,
     "_level": 3,
     "_components": [
       {
-        "__id__": 40
+        "__id__": 32
       }
     ],
     "_prefab": null,
@@ -1676,7 +1367,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 39
+      "__id__": 31
     },
     "_enabled": true,
     "_srcBlendFactor": 1,
@@ -1727,7 +1418,7 @@
     "_level": 1,
     "_components": [
       {
-        "__id__": 43
+        "__id__": 35
       }
     ],
     "_prefab": null,
@@ -1780,17 +1471,23 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 42
+      "__id__": 34
     },
     "_enabled": true,
     "scoreLabel": {
-      "__id__": 40
+      "__id__": 32
     },
     "characterController": {
       "__id__": 21
     },
     "zombiePrefab": {
       "__uuid__": "e216464d-eb48-49c3-8b22-f367c2e401e5"
+    },
+    "knifePrefab": {
+      "__uuid__": "52ab7ab0-7768-4f8d-96d0-f91615610b55"
+    },
+    "swordPrefab": {
+      "__uuid__": "58e1834d-74af-46ea-ac99-08797136d388"
     },
     "gameNode": {
       "__id__": 2
