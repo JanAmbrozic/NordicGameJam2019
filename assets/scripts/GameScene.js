@@ -126,8 +126,13 @@ cc.Class({
                 this.characterController.attack();
                 break;
             case cc.macro.MOUSE_DOWN:
+             if(event.button === cc.Event.EventMouse.BUTTON_RIGHT) {
+
+             } else {
                 this.characterController.attack();
-                break;
+             }
+             break;
+
         }
     },
 
@@ -228,5 +233,9 @@ cc.Class({
 
     increaseKnives (amount) {
         this.knivesLabel.string = 'x' + amount;
+    },
+
+    getScore () {
+        return this.score;
     }
 });
