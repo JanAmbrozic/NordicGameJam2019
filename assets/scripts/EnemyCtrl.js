@@ -38,6 +38,7 @@ cc.Class({
     },
 
     follow() {
+        this.node.y = -381;
         this.zombieCollider.enabled = true;
         this.state = State.FOLLOW;
         this.zombieAnim.play('ZombieWalk');
@@ -47,7 +48,7 @@ cc.Class({
         if (this.state === State.FOLLOW) {
             this.node.x += this.speed * dt * this.getDirection();
         } else if (this.state === State.FALLING) {
-            if (this.node.y > -340) {
+            if (this.node.y > -371) {
                 this.node.y -= this.fallingSpeed * dt;
             } else {
                 this.follow();
@@ -61,7 +62,7 @@ cc.Class({
             this.zombieCollider.offset.x = 480;
             return 1;
         } else {
-            this.zombieNode.scaleX  = -1;
+            this.zombieNode.scaleX = -1;
             this.zombieCollider.offset.x = 200;
             return -1;
         }
@@ -125,6 +126,4 @@ cc.Class({
         this.zombieAnim.play('ZombieAttack');
         this.state = State.FALLING;
     }
-
-    // update (dt) {},
 });
