@@ -23,6 +23,7 @@ cc.Class({
         this.hasKnife = false;
         this.hasSword = false;
 
+        this.screenWidth = cc.view.getVisibleSize().width;
         this.speed = 1400;
         this.jumpSpeed = 1200;
         this._changeState(State.IDLE);
@@ -104,7 +105,7 @@ cc.Class({
         if (this.state === State.DEAD) {
             return;
         }
-        if (this.isAttack && this.isJumping) {
+        if (this.isAttack || this.isJumping) {
             return;
         }
         if (this.hasKnife) {
@@ -147,6 +148,11 @@ cc.Class({
             } else {
                 this.container.x += dt * this.speed * this.container.scaleX;
             }
+            if (this.container.x < -this.container.width - this.screenWidth / 2) {
+                this.container.x += this.screenWidth;
+            } else if (this.container.x > this.screenWidth / 2 + this.container.width) {
+                this.container.x -= this.screenWidth;
+            }
         }
 
     },
@@ -166,7 +172,12 @@ cc.Class({
 
     // Callback when starts the throw frame
     onThrow () {
-        this.knife.fly();
+        const position = this.knife.container.parent.convertToWorldSpaceAR(this.knife.container.position);
+
+        this.knife.container.position = this.container.parent.convertToNodeSpaceAR(position);
+        this.knife.container.parent = null;
+        this.container.parent.addChild(this.knife.container);
+        this.knife.fly(this.isRightDirection);
     },
 
     // Callback when starts the sword hit frame

@@ -26,17 +26,18 @@ cc.Class({
         this.container.active = false;
     },
 
-    fly () {
+    fly (direction) {
         if (this.state === State.FLY) {
             return;
         }
         this.container.active = true;
         this.state = State.FLY;
+        this.container.scaleX = direction ? 1 : -1;
     },
 
     update (dt) {
         if (this.state === State.FLY) {
-            this.container.x += dt * this.speed;
+            this.container.x += dt * this.speed * this.container.scaleX;
         }
     }
 });
