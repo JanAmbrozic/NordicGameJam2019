@@ -14,7 +14,7 @@ cc.Class({
         characterSprite: cc.Sprite,
         swordCollider: cc.Collider,
         animation: cc.Animation,
-        audioSource: cc.AudioSource,
+        swooshAudio: cc.AudioSource,
         hiyaAudio: cc.AudioSource
     },
 
@@ -195,7 +195,7 @@ cc.Class({
     onSword () {
         this.swordCollider.node.active = true;
         this.swordCollider.enabled = true;
-        this.audioSource.play();
+        this.swooshAudio.play();
     },
 
     _changeState (state) {

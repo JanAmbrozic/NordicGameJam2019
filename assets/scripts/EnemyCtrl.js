@@ -38,6 +38,7 @@ cc.Class({
     },
 
     follow() {
+        this.zombieCollider.enabled = true;
         this.state = State.FOLLOW;
         this.zombieAnim.play('ZombieWalk');
     },
@@ -120,6 +121,7 @@ cc.Class({
     },
 
     fallDown() {
+        this.zombieCollider.enabled = false;
         this.zombieAnim.play('ZombieAttack');
         this.state = State.FALLING;
     }
