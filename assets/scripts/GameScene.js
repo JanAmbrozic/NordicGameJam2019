@@ -1,15 +1,14 @@
 const CharacterController = require('CharacterController');
+const EnemyController = require('EnemyCtrl');
 
 cc.Class({
     extends: cc.Component,
 
     properties: {
-        characterController: CharacterController
+        scoreLabel: cc.Label,
+        characterController: CharacterController,
+        zombiePrefab: cc.Prefab
     },
-
-    // LIFE-CYCLE CALLBACKS:
-
-    // onLoad () {},
 
     start () {
         var manager = cc.director.getCollisionManager();
@@ -19,6 +18,13 @@ cc.Class({
         // add key down and key up event
         cc.game.canvas.addEventListener(cc.SystemEvent.EventType.KEY_DOWN, (event) => this.onKeyDown(event));
         cc.game.canvas.addEventListener(cc.SystemEvent.EventType.KEY_UP, (event) => this.onKeyUp(event));
+
+        this.score = 0;
+        this.createEnemy();
+
+        this.characterController.node.on('die', () => {
+            this.restart();
+        });
     },
 
     onKeyDown (event) {
@@ -49,6 +55,23 @@ cc.Class({
                 this.characterController.attack();
                 break;
         }
+    },
+
+    createEnemy () {
+        this.enemy = cc.instantiate(this.zombiePrefab);
+        this.enemy.on('die', () => {
+            this.increaseScore();
+        })
+    },
+
+    restart () {
+        cc.director.loadScene('Game');
+    },
+
+    increaseScore () {
+        this.score ++;
+        this.scoreLabel.string = this.score;
+        this.createEnemy();
     },
 
     onKeyUp (event) {

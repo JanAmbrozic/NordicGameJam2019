@@ -24,7 +24,7 @@ cc.Class({
         this.hasSword = false;
 
         this.speed = 1400;
-        this.jumpSpeed = 700;
+        this.jumpSpeed = 1200;
         this._changeState(State.IDLE);
     },
 
@@ -78,6 +78,7 @@ cc.Class({
         if (this.state === State.DEAD) {
             return;
         }
+        this.node.emit('die');
         this._changeState(State.DEAD);
     },
 
