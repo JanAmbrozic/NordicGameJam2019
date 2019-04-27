@@ -20,7 +20,7 @@ cc.Class({
         this.isJumping = false;
         this.isRightDirection = true;
         this.hasKnife = false;
-        this.hasSword = false;
+        this.hasSword = true;
 
         this.screenWidth = cc.view.getVisibleSize().width;
         this.speed = 1400;

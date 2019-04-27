@@ -7,6 +7,7 @@ cc.Class({
     properties: {
         scoreLabel: cc.Label,
         characterController: CharacterController,
+        zombieContainer: cc.Node,
         zombiePrefab: cc.Prefab,
         knifePrefab: cc.Prefab,
         swordPrefab: cc.Prefab,
@@ -19,8 +20,10 @@ cc.Class({
 
         this._pressedKeyMap = new Map();
         // add key down and key up event
-        cc.game.canvas.addEventListener(cc.SystemEvent.EventType.KEY_DOWN, (event) => this.onKeyDown(event));
-        cc.game.canvas.addEventListener(cc.SystemEvent.EventType.KEY_UP, (event) => this.onKeyUp(event));
+        this.onKeyDownCallback = (event) => this.onKeyDown(event);
+        this.onKeyUpCallback = (event) => this.onKeyUp(event);
+        cc.game.canvas.addEventListener(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDownCallback);
+        cc.game.canvas.addEventListener(cc.SystemEvent.EventType.KEY_UP, this.onKeyUpCallback);
 
         this.score = 0;
         this.schedule(this.createEnemy, 2);
@@ -30,6 +33,11 @@ cc.Class({
         this.characterController.node.on('die', () => {
             this.restart();
         });
+    },
+
+    onDestroy () {
+        cc.game.canvas.removeEventListener(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDownCallback);
+        cc.game.canvas.removeEventListener(cc.SystemEvent.EventType.KEY_UP, this.onKeyUpCallback);
     },
 
     onKeyDown (event) {
@@ -64,7 +72,7 @@ cc.Class({
 
     createEnemy () {
         this.enemy = cc.instantiate(this.zombiePrefab);
-        this.gameNode.addChild(this.enemy);
+        this.zombieContainer.addChild(this.enemy);
         this.enemy.getComponent('EnemyCtrl').fallDown();
         this.enemy.on('die', () => {
             this.increaseScore();
@@ -77,7 +85,9 @@ cc.Class({
     },
 
     restart () {
-        cc.director.loadScene('Game');
+        this.scheduleOnce(() => {
+            cc.director.loadScene('Game');
+        }, 2)
     },
 
     increaseScore () {
