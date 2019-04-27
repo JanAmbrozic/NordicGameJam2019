@@ -41,6 +41,13 @@ cc.Class({
                 this.characterController.setDirection(true);
                 this.characterController.run();
                 break;
+            case cc.macro.KEY.w:
+            case cc.macro.KEY.up:
+                this.characterController.jump();
+                break;
+            case cc.macro.KEY.space:
+                this.characterController.attack();
+                break;
         }
     },
 
@@ -65,13 +72,6 @@ cc.Class({
                 } else {
                     this.characterController.idle();
                 }
-                break;
-            case cc.macro.KEY.w:
-            case cc.macro.KEY.up:
-                this.characterController.jump();
-                break;
-            case cc.macro.KEY.space:
-                this.characterController.attack();
                 break;
         }
     },

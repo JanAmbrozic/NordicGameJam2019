@@ -10,21 +10,33 @@
     [
       true,
       true,
+      true,
+      null,
       true
     ],
     [
       true,
       false,
       false,
+      true,
       true
     ],
     [
+      true,
+      false,
+      false,
+      null,
+      true
+    ],
+    [
+      false,
       true,
       false,
       false
     ],
     [
-      false,
+      true,
+      true,
       true,
       false,
       false
@@ -39,7 +51,8 @@
     "default",
     "Character",
     "Weapon",
-    "Items"
+    "Items",
+    "Enemy"
   ],
   "simulator-orientation": false,
   "simulator-resolution": {
@@ -47,6 +60,5 @@
     "width": 960
   },
   "use-customize-simulator": false,
-  "use-project-simulator-setting": false,
-  "start-scene": "current"
+  "use-project-simulator-setting": false
 }

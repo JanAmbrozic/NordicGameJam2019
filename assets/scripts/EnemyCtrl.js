@@ -16,8 +16,16 @@ cc.Class({
     start () {
         this.state = State.IDLE;
         //this.zombieAnim.play('ZombieIdle');
-        this.follow();
+        this.idle();
         this.speed = 500;
+    },
+
+    onCollisionEnter (other) {
+        console.log(other.tag)
+        // this.state = State.IDLE;
+        if (other.tag !== 0) {
+            this.die();
+        }
     },
 
     follow() {
