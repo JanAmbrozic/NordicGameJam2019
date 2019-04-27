@@ -36,6 +36,7 @@ cc.Class({
         this.onKeyUpCallback = (event) => this.onKeyUp(event);
         cc.game.canvas.addEventListener(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDownCallback);
         cc.game.canvas.addEventListener(cc.SystemEvent.EventType.KEY_UP, this.onKeyUpCallback);
+        cc.game.canvas.addEventListener(cc.Node.EventType.MOUSE_DOWN, this.onKeyDownCallback);
 
         this.score = 0;
         this.createKnife();
@@ -58,6 +59,7 @@ cc.Class({
     onDestroy () {
         cc.game.canvas.removeEventListener(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDownCallback);
         cc.game.canvas.removeEventListener(cc.SystemEvent.EventType.KEY_UP, this.onKeyUpCallback);
+        cc.game.canvas.removeEventListener(cc.Node.EventType.MOUSE_DOWN, this.onKeyDownCallback);
     },
 
     onKeyUp (event) {
@@ -120,6 +122,9 @@ cc.Class({
                 this.characterController.jump();
                 break;
             case cc.macro.KEY.space:
+                this.characterController.attack();
+                break;
+            case cc.macro.MOUSE_DOWN:
                 this.characterController.attack();
                 break;
         }
