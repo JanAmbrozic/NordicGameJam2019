@@ -26,6 +26,7 @@ cc.Class({
     },
 
     start () {
+        this.enemyInterval = 5;
         this.state = State.GAME;
         var manager = cc.director.getCollisionManager();
         manager.enabled = true;
@@ -127,10 +128,10 @@ cc.Class({
 
     createEnemy () {
         this.unschedule(this.createEnemy);
-        this.scheduleOnce(this.createEnemy, 5);
+        this.scheduleOnce(this.createEnemy, this.enemyInterval);
 
         this.enemy = cc.instantiate(this.zombiePrefab);
-        this.enemy.x = (Math.random() * cc.view.getVisibleSize().width - cc.view.getVisibleSize().width / 2) * 0.8;
+        this.enemy.x = this._getRandomPosition();
         this.zombieContainer.addChild(this.enemy);
         this.enemy.getComponent('EnemyCtrl').fallDown();
         this.enemy.on('die', () => {
@@ -145,10 +146,19 @@ cc.Class({
             this.createKnife();
         }, 6);
 
-        this.knife = cc.instantiate(this.knifePrefab);
-        this.knife.x = (Math.random() * cc.view.getVisibleSize().width - cc.view.getVisibleSize().width / 2) * 0.8;
-        this.knife.y = Math.random() * cc.view.getVisibleSize().height * 0.5 ;
-        this.itemsContainer.addChild(this.knife);
+        const knife = cc.instantiate(this.knifePrefab);
+        knife.x = this._getRandomPosition();
+        knife.y = Math.random() * cc.view.getVisibleSize().height * 0.5 ;
+        this.itemsContainer.addChild(knife);
+
+        this.scheduleOnce(() => {
+            knife.runAction(cc.sequence(
+                cc.fadeIn(0.5),
+                cc.callFunc(() => {
+                    knife.destroy();
+                })
+            ))
+        }, 4);
     },
 
     createSpike () {
@@ -159,7 +169,7 @@ cc.Class({
             this.createSpike();
         }, 10);
         const spike = cc.instantiate(this.spikePrefab);
-        spike.x = (Math.random() * cc.view.getVisibleSize().width - cc.view.getVisibleSize().width / 2) * 0.8;
+        spike.x = this._getRandomPosition();
         spike.y = -150;
         this.itemsContainer.addChild(spike);
         spike.runAction(cc.moveBy(0.5, 0, 100));
@@ -172,6 +182,15 @@ cc.Class({
                 })
             ))
         }, 4);
+    },
+
+    _getRandomPosition () {
+        while(true) {
+            let x = (Math.random() * cc.view.getVisibleSize().width - cc.view.getVisibleSize().width / 2) * 0.8;
+            if (Math.abs(this.characterController.container.x - x) > 300) {
+                return x;
+            }
+        }
     },
 
     fadeScene () {
@@ -193,6 +212,13 @@ cc.Class({
     increaseScore () {
         this.score ++;
         this.scoreLabel.string = 'x' + this.score;
+        if (this.score > 5) {
+            this.enemyInterval = 4;
+        } else if (this.score > 10) {
+            this.enemyInterval = 3;
+        }else if (this.score > 15) {
+            this.enemyInterval = 2;
+        }
     },
 
     increaseKnives (amount) {
