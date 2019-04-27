@@ -118,12 +118,20 @@ cc.Class({
         }
         this.node.emit('die');
         this.node.getComponent(BloodController).play(this.groundContainer,
-            this.node.x , -this.zombieNode.scaleX)
+            this.getNodeMiddle() , -this.zombieNode.scaleX)
         this.zombieAnim.play('ZombieDead');
         this.state = State.DEAD;
         this.zombieCollider.enabled = false;
         this.zombieMoan.play();
         this.zombieIdleAudio.stop();
+    },
+
+    getNodeMiddle() {
+        if (this.zombieNode.scaleX === 1) {
+            return this.zombieCollider.node.x + (this.zombieCollider.node.width/2);
+        } else {
+            return this.zombieCollider.node.x;
+        }
     },
 
     idle() {
