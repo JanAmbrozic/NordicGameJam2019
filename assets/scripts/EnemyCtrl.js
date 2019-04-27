@@ -12,7 +12,9 @@ cc.Class({
     properties: {
         zombieAnim: cc.Animation,
         zombieNode: cc.Node,
-        zombieCollider: cc.Collider
+        zombieCollider: cc.Collider,
+        zombieMoan: cc.AudioSource,
+        zombieIdleAudio: cc.AudioSource
     },
 
     start () {
@@ -21,6 +23,8 @@ cc.Class({
         this.wiggleRoom = 250;
         this.fallingSpeed = 1000;
         this.playerNode = cc.find('Canvas/CharacterContainer');
+        this.zombieIdleAudio.loop = true;
+        this.zombieIdleAudio.play();
     },
 
     onCollisionEnter (collidedNode) {
@@ -104,6 +108,7 @@ cc.Class({
         this.zombieAnim.play('ZombieDead');
         this.state = State.DEAD;
         this.zombieCollider.enabled = false;
+        this.zombieMoan.play();
     },
 
     idle() {

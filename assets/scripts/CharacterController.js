@@ -13,7 +13,9 @@ cc.Class({
         container: cc.Node,
         characterSprite: cc.Sprite,
         swordCollider: cc.Collider,
-        animation: cc.Animation
+        animation: cc.Animation,
+        audioSource: cc.AudioSource,
+        hiyaAudio: cc.AudioSource
     },
 
     start () {
@@ -91,6 +93,7 @@ cc.Class({
         }
         this.isJumping = true;
         this.animation.play('jump');
+        //this.hiyaAudio.play();
     },
 
     _attackSword () {
@@ -134,6 +137,7 @@ cc.Class({
             this.hasKnife = false;
             this.isAttack = true;
             this.animation.play('throw');
+            this.hiyaAudio.play();
         }
     },
 
@@ -183,6 +187,7 @@ cc.Class({
     onSword () {
         this.swordCollider.node.active = true;
         this.swordCollider.enabled = true;
+        this.audioSource.play();
     },
 
     _changeState (state) {
