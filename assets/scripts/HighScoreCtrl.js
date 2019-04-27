@@ -23,6 +23,7 @@ cc.Class({
     checkIfHighScore() {
         if ( this.getSavedScore() < this.gameSceneCtrl.getScore() ) {
             this.label.string  = `NEW HIGH SCORE: ${this.gameSceneCtrl.getScore()}`
+            cc.sys.localStorage.setItem('highScore', this.gameSceneCtrl.getScore());
         } else {
             this.label.string  = `PREVIOUS HIGH SCORE: ${this.getSavedScore()}`
         }

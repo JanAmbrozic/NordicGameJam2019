@@ -1,5 +1,6 @@
 const CharacterController = require('CharacterController');
 const EnemyController = require('EnemyCtrl');
+const HighScoreCtrl = require('HighScoreCtrl');
 
 const State = cc.Enum({
     GAME: 'game',
@@ -14,6 +15,7 @@ cc.Class({
         scoreLabel: cc.Label,
         knivesLabel: cc.Label,
         againLabel: cc.Label,
+        highScore: HighScoreCtrl,
         characterController: CharacterController,
         zombieContainer: cc.Node,
         itemsContainer: cc.Node,
@@ -133,11 +135,14 @@ cc.Class({
             case cc.macro.KEY.enter:
                 this.characterController.attack();
                 break;
+            case cc.macro.KEY.x:
+                this.characterController.attack();
+                break;
             case cc.macro.MOUSE_DOWN:
              if(event.button === cc.Event.EventMouse.BUTTON_RIGHT) {
-
-             } else {
                 this.characterController.attack();
+             } else {
+                this.characterController.attackSword();
              }
              break;
 
@@ -230,6 +235,7 @@ cc.Class({
                 cc.callFunc(() => {
                     this.state = State.RESTART;
             })));
+            this.highScore.checkIfHighScore();
         }, 2)
     },
 
