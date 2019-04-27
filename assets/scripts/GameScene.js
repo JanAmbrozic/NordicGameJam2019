@@ -1,12 +1,19 @@
 const CharacterController = require('CharacterController');
 const EnemyController = require('EnemyCtrl');
 
+const State = cc.Enum({
+    GAME: 'game',
+    TRANSITION: 'transition',
+    RESTART: 'restart'
+});
+
 cc.Class({
     extends: cc.Component,
 
     properties: {
         scoreLabel: cc.Label,
         knivesLabel: cc.Label,
+        againLabel: cc.Label,
         characterController: CharacterController,
         zombieContainer: cc.Node,
         itemsContainer: cc.Node,
@@ -19,6 +26,7 @@ cc.Class({
     },
 
     start () {
+        this.state = State.GAME;
         var manager = cc.director.getCollisionManager();
         manager.enabled = true;
 
@@ -36,7 +44,7 @@ cc.Class({
         }, 10);
 
         this.characterController.node.on('die', () => {
-            this.restart();
+            this.fadeScene();
         });
         this.characterController.node.on('updateKnife', (knifeAmount) => {
             this.increaseKnives(knifeAmount);
@@ -52,7 +60,42 @@ cc.Class({
         cc.game.canvas.removeEventListener(cc.SystemEvent.EventType.KEY_UP, this.onKeyUpCallback);
     },
 
+    onKeyUp (event) {
+        if (this.state !== State.GAME) {
+            return;
+        }
+        switch(event.keyCode) {
+            case cc.macro.KEY.a:
+            case cc.macro.KEY.left:
+                this._pressedKeyMap.set("LEFT", false);
+                if (this._pressedKeyMap.get("RIGHT")) {
+                    this.characterController.setDirection(true);
+                    this.characterController.run();
+                } else {
+                    this.characterController.idle();
+                }
+                break;
+            case cc.macro.KEY.d:
+            case cc.macro.KEY.right:
+                this._pressedKeyMap.set("RIGHT", false);
+                if (this._pressedKeyMap.get("LEFT")) {
+                    this.characterController.setDirection(false);
+                    this.characterController.run();
+                } else {
+                    this.characterController.idle();
+                }
+                break;
+        }
+    },
+
     onKeyDown (event) {
+        switch (this.state) {
+            case State.RESTART:
+                this.restart();
+                return;
+            case State.TRANSITION:
+                return;
+        }
         switch(event.keyCode) {
             case cc.macro.KEY.a:
             case cc.macro.KEY.left:
@@ -87,6 +130,7 @@ cc.Class({
         this.scheduleOnce(this.createEnemy, 5);
 
         this.enemy = cc.instantiate(this.zombiePrefab);
+        this.enemy.x = (Math.random() * cc.view.getVisibleSize().width - cc.view.getVisibleSize().width / 2) * 0.8;
         this.zombieContainer.addChild(this.enemy);
         this.enemy.getComponent('EnemyCtrl').fallDown();
         this.enemy.on('die', () => {
@@ -130,11 +174,20 @@ cc.Class({
         }, 4);
     },
 
-    restart () {
+    fadeScene () {
+        this.state = State.TRANSITION;
         this.animation.play('close');
         this.scheduleOnce(() => {
-            cc.director.loadScene('Game');
+            this.againLabel.node.runAction(cc.sequence(
+                cc.fadeIn(1),
+                cc.callFunc(() => {
+                    this.state = State.RESTART;
+            })));
         }, 2)
+    },
+
+    restart () {
+        cc.director.loadScene('Game');
     },
 
     increaseScore () {
@@ -144,30 +197,5 @@ cc.Class({
 
     increaseKnives (amount) {
         this.knivesLabel.string = 'x' + amount;
-    },
-
-    onKeyUp (event) {
-        switch(event.keyCode) {
-            case cc.macro.KEY.a:
-            case cc.macro.KEY.left:
-                this._pressedKeyMap.set("LEFT", false);
-                if (this._pressedKeyMap.get("RIGHT")) {
-                    this.characterController.setDirection(true);
-                    this.characterController.run();
-                } else {
-                    this.characterController.idle();
-                }
-                break;
-            case cc.macro.KEY.d:
-            case cc.macro.KEY.right:
-                this._pressedKeyMap.set("RIGHT", false);
-                if (this._pressedKeyMap.get("LEFT")) {
-                    this.characterController.setDirection(false);
-                    this.characterController.run();
-                } else {
-                    this.characterController.idle();
-                }
-                break;
-        }
-    },
+    }
 });
