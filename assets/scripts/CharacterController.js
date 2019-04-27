@@ -12,7 +12,6 @@ cc.Class({
     properties: {
         container: cc.Node,
         characterSprite: cc.Sprite,
-        knife: KnifeController,
         swordCollider: cc.Collider,
         animation: cc.Animation
     },

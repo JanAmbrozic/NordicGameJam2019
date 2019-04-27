@@ -1,7 +1,9 @@
 const State = cc.Enum({
     FOLLOW: 'stateFollow',
     IDLE: 'stateIdle',
-    ATTACKING: 'stateAttacking'
+    ATTACKING: 'stateAttacking',
+    FALLING: 'stateFalling',
+    DEAD: 'stateDead'
 });
 
 cc.Class({
@@ -10,20 +12,24 @@ cc.Class({
     properties: {
         zombieAnim: cc.Animation,
         zombieNode: cc.Node,
-        playerNode: cc.Node
+        zombieCollider: cc.Collider
     },
 
     start () {
-        this.state = State.IDLE;
         //this.zombieAnim.play('ZombieIdle');
-        this.idle();
         this.speed = 500;
+        this.wiggleRoom = 250;
+        this.fallingSpeed = 1000;
+        this.playerNode = cc.find('Canvas/CharacterContainer');
     },
 
     onCollisionEnter (collidedNode) {
         console.log(collidedNode.node.name)
         if(collidedNode.node.name === 'swordCollider' || collidedNode.tag === 1) {
             this.die();
+        } else if (collidedNode.node.name === 'characterController') {
+            this.zombieAnim.play('ZombieAttack');
+            this.state = State.ATTACKING;
         }
     },
 
@@ -34,17 +40,18 @@ cc.Class({
 
     update(dt) {
         if (this.state === State.FOLLOW) {
-            this.zombieNode.x += this.speed * dt * this.getDirection();
+            this.node.x += this.speed * dt * this.getDirection();
+        } else if (this.state === State.FALLING) {
+            if (this.node.y > -340) {
+                this.node.y -= this.fallingSpeed * dt;
+            } else {
+                this.follow();
+            }
         }
     },
 
     getDirection() {
-       // console.log(this.playerNode.x, this.zombieNode.x)
-       if (this.playerNode.x > this.getZombiePosX() + 100 && this.getZombiePosX() < this.playerNode.x + 100) {
-            this.zombieAnim.play('ZombieAttack');
-            this.state = State.ATTACKING;
-            return this.zombieNode.scaleX;
-       } else if (this.playerNode.x > this.getZombiePosX()) {
+        if (this.playerNode.x > this.getZombiePosX()) {
             this.zombieNode.scaleX = 1;
             return 1;
         } else {
@@ -54,7 +61,7 @@ cc.Class({
     },
 
     getZombiePosX() {
-        return (this.zombieNode.x * this.node.scale) + (this.zombieNode.width);
+        return (this.node.x + (this.wiggleRoom * this.zombieNode.scaleX * -1));
     },
 
     walk () {
@@ -84,9 +91,6 @@ cc.Class({
 
     onAttackComplete() {
         this.idle();
-        this.scheduleOnce( () => {
-            this.die();
-        }, 2);
     },
 
     die() {
@@ -95,6 +99,8 @@ cc.Class({
             this.zombieNode.x = this.zombieNode.x - (150 * this.zombieNode.scaleX);
         }
         this.zombieAnim.play('ZombieDead');
+        this.state = State.DEAD;
+        this.zombieCollider.enabled = false;
     },
 
     idle() {
@@ -103,6 +109,11 @@ cc.Class({
             this.zombieNode.x = this.zombieNode.x - (150 * this.zombieNode.scaleX);
         }
         this.zombieAnim.play('ZombieIdle');
+    },
+
+    fallDown() {
+        this.zombieAnim.play('ZombieAttack');
+        this.state = State.FALLING;
     }
 
     // update (dt) {},

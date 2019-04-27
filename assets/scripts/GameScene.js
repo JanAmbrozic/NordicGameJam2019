@@ -7,7 +7,10 @@ cc.Class({
     properties: {
         scoreLabel: cc.Label,
         characterController: CharacterController,
-        zombiePrefab: cc.Prefab
+        zombiePrefab: cc.Prefab,
+        knifePrefab: cc.Prefab,
+        swordPrefab: cc.Prefab,
+        gameNode: cc.Node
     },
 
     start () {
@@ -20,7 +23,9 @@ cc.Class({
         cc.game.canvas.addEventListener(cc.SystemEvent.EventType.KEY_UP, (event) => this.onKeyUp(event));
 
         this.score = 0;
+        this.schedule(this.createEnemy, 2);
         this.createEnemy();
+        this.createKnife();
 
         this.characterController.node.on('die', () => {
             this.restart();
@@ -59,9 +64,16 @@ cc.Class({
 
     createEnemy () {
         this.enemy = cc.instantiate(this.zombiePrefab);
+        this.gameNode.addChild(this.enemy);
+        this.enemy.getComponent('EnemyCtrl').fallDown();
         this.enemy.on('die', () => {
             this.increaseScore();
-        })
+        });
+    },
+
+    createKnife () {
+        this.knife = cc.instantiate(this.knifePrefab);
+        this.gameNode.addChild(this.knife);
     },
 
     restart () {
