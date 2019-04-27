@@ -6,12 +6,16 @@ cc.Class({
 
     properties: {
         scoreLabel: cc.Label,
+        knivesLabel: cc.Label,
         characterController: CharacterController,
         zombieContainer: cc.Node,
+        itemsContainer: cc.Node,
         zombiePrefab: cc.Prefab,
         knifePrefab: cc.Prefab,
         swordPrefab: cc.Prefab,
-        gameNode: cc.Node
+        spikePrefab: cc.Prefab,
+        gameNode: cc.Node,
+        animation: cc.Animation
     },
 
     start () {
@@ -26,12 +30,21 @@ cc.Class({
         cc.game.canvas.addEventListener(cc.SystemEvent.EventType.KEY_UP, this.onKeyUpCallback);
 
         this.score = 0;
-        this.createEnemy();
         this.createKnife();
+        this.scheduleOnce(() => {
+            this.createSpike();
+        }, 10);
 
         this.characterController.node.on('die', () => {
             this.restart();
         });
+        this.characterController.node.on('updateKnife', (knifeAmount) => {
+            this.increaseKnives(knifeAmount);
+        });
+    },
+
+    onGameStart () {
+        this.createEnemy();
     },
 
     onDestroy () {
@@ -83,11 +96,42 @@ cc.Class({
     },
 
     createKnife () {
+        cc.log('knife');
+        this.scheduleOnce(() => {
+            this.createKnife();
+        }, 6);
+
         this.knife = cc.instantiate(this.knifePrefab);
-        this.gameNode.addChild(this.knife);
+        this.knife.x = (Math.random() * cc.view.getVisibleSize().width - cc.view.getVisibleSize().width / 2) * 0.8;
+        this.knife.y = Math.random() * cc.view.getVisibleSize().height * 0.5 ;
+        this.itemsContainer.addChild(this.knife);
+    },
+
+    createSpike () {
+        this.scheduleOnce(() => {
+            if (this.score > 20) {
+                this.createSpike();
+            }
+            this.createSpike();
+        }, 10);
+        const spike = cc.instantiate(this.spikePrefab);
+        spike.x = (Math.random() * cc.view.getVisibleSize().width - cc.view.getVisibleSize().width / 2) * 0.8;
+        spike.y = -150;
+        this.itemsContainer.addChild(spike);
+        spike.runAction(cc.moveBy(0.5, 0, 100));
+
+        this.scheduleOnce(() => {
+            spike.runAction(cc.sequence(
+                cc.moveBy(0.5, 0, -100),
+                cc.callFunc(() => {
+                    spike.destroy();
+                })
+            ))
+        }, 4);
     },
 
     restart () {
+        this.animation.play('close');
         this.scheduleOnce(() => {
             cc.director.loadScene('Game');
         }, 2)
@@ -96,6 +140,10 @@ cc.Class({
     increaseScore () {
         this.score ++;
         this.scoreLabel.string = 'x' + this.score;
+    },
+
+    increaseKnives (amount) {
+        this.knivesLabel.string = 'x' + amount;
     },
 
     onKeyUp (event) {

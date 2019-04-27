@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "knifeContainer",
+    "_name": "Knife",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -22,7 +22,7 @@
       }
     ],
     "_active": true,
-    "_level": 2,
+    "_level": 1,
     "_components": [],
     "_prefab": {
       "__id__": 7
@@ -47,8 +47,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -182,
-      "y": -370,
+      "x": 0,
+      "y": 150,
       "z": 0
     },
     "_scale": {
@@ -61,8 +61,8 @@
       "__type__": "cc.Quat",
       "x": 0,
       "y": 0,
-      "z": 0,
-      "w": 1
+      "z": -0.7071067811865475,
+      "w": 0.7071067811865476
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -207,7 +207,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "52ab7ab0-7768-4f8d-96d0-f91615610b55"
     },
     "fileId": "e20Q95XLpBkL8ZDiML17U9",
     "sync": false
@@ -218,7 +218,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "52ab7ab0-7768-4f8d-96d0-f91615610b55"
     },
     "fileId": "bexk0rc+BFY7B1KHHWoRrP",
     "sync": false

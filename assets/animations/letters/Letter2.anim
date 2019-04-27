@@ -1,0 +1,38 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "Letter2",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 1.4,
+  "sample": 10,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "props": {
+      "position": [
+        {
+          "frame": 0.6,
+          "value": [
+            -190,
+            -661
+          ]
+        },
+        {
+          "frame": 1.1,
+          "value": [
+            -129,
+            206
+          ]
+        },
+        {
+          "frame": 1.4,
+          "value": [
+            -114,
+            11
+          ]
+        }
+      ]
+    }
+  },
+  "events": []
+}

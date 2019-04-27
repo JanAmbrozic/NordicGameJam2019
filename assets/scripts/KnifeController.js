@@ -30,6 +30,9 @@ cc.Class({
         if (this.state === State.FLY) {
             return;
         }
+        this.scheduleOnce(() => {
+            this.node.destroy();
+        }, 4)
         this.container.active = true;
         this.state = State.FLY;
         this.container.scaleX = direction ? 1 : -1;

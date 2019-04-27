@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "spike",
+    "_name": "Spike",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -50,8 +50,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -295,
-      "y": 11,
+      "x": 0,
+      "y": -150,
       "z": 0
     },
     "_scale": {
@@ -131,7 +131,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "fbeceaf1-680f-4776-ad82-8cedb4013eb8"
     },
     "fileId": "8acIk2cY9ANqgoD5Ot20Ze",
     "sync": false
