@@ -83,7 +83,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "zombieSprite",
+    "_name": "Idle (1)",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -109,8 +109,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 282,
-      "height": 458
+      "width": 381,
+      "height": 422
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -154,7 +154,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "cfd277d5-98fc-4bf7-a9f6-e0d96ce430e1"
+      "__uuid__": "53acec5a-0b21-4a56-ae87-1f4b2ad14382"
     },
     "_type": 0,
     "_sizeMode": 1,

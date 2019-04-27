@@ -77,7 +77,7 @@
   },
   "events": [
     {
-      "frame": 0.2,
+      "frame": 0.15,
       "func": "onSword",
       "params": []
     },

@@ -26,7 +26,6 @@ cc.Class({
         cc.game.canvas.addEventListener(cc.SystemEvent.EventType.KEY_UP, this.onKeyUpCallback);
 
         this.score = 0;
-        this.schedule(this.createEnemy, 2);
         this.createEnemy();
         this.createKnife();
 
@@ -71,10 +70,14 @@ cc.Class({
     },
 
     createEnemy () {
+        this.unschedule(this.createEnemy);
+        this.scheduleOnce(this.createEnemy, 5);
+
         this.enemy = cc.instantiate(this.zombiePrefab);
         this.zombieContainer.addChild(this.enemy);
         this.enemy.getComponent('EnemyCtrl').fallDown();
         this.enemy.on('die', () => {
+            this.createEnemy();
             this.increaseScore();
         });
     },
@@ -92,8 +95,7 @@ cc.Class({
 
     increaseScore () {
         this.score ++;
-        this.scoreLabel.string = this.score;
-        this.createEnemy();
+        this.scoreLabel.string = 'x' + this.score;
     },
 
     onKeyUp (event) {

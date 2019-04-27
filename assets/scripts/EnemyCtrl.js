@@ -67,11 +67,11 @@ cc.Class({
     walk () {
         this.zombieAnim.play('ZombieWalk');
         var seq = (cc.sequence(
-            cc.moveTo(2, {x: - 400, y: 0}), 
+            cc.moveTo(2, {x: - 400, y: 0}),
             cc.callFunc(()=>{
                  this.node.scaleX = -1;
                  this.node.x =  this.node.x + (282 * 2);
-            }), 
+            }),
             cc.moveTo(2, {x: 400, y: 0}),
             cc.callFunc(()=>{
                 this.node.scaleX = 1;
@@ -98,6 +98,7 @@ cc.Class({
             this.zombieNode.anchorX = 0;
             this.zombieNode.x = this.zombieNode.x - (150 * this.zombieNode.scaleX);
         }
+        this.node.emit('die');
         this.zombieAnim.play('ZombieDead');
         this.state = State.DEAD;
         this.zombieCollider.enabled = false;
