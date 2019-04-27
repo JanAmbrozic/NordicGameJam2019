@@ -20,10 +20,9 @@ cc.Class({
         this.speed = 500;
     },
 
-    onCollisionEnter (other) {
-        console.log(other.tag)
-        // this.state = State.IDLE;
-        if (other.tag !== 0) {
+    onCollisionEnter (collidedNode) {
+        console.log(collidedNode.node.name)
+        if(collidedNode.node.name === 'swordCollider' || collidedNode.tag === 1) {
             this.die();
         }
     },
