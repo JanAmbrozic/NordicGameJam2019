@@ -20,7 +20,7 @@
         "__id__": 42
       }
     ],
-    "_active": true,
+    "_active": false,
     "_level": 0,
     "_components": [],
     "_prefab": null,
@@ -1791,6 +1791,9 @@
     },
     "zombiePrefab": {
       "__uuid__": "e216464d-eb48-49c3-8b22-f367c2e401e5"
+    },
+    "gameNode": {
+      "__id__": 2
     },
     "_id": "90CYeWfH5Ly4nr0fzhKO3w"
   }

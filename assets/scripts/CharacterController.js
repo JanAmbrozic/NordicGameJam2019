@@ -104,7 +104,7 @@ cc.Class({
         if (this.state === State.DEAD) {
             return;
         }
-        if (this.isAttack && this.isJumping) {
+        if (this.isAttack || this.isJumping) {
             return;
         }
         if (this.hasKnife) {
