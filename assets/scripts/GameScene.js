@@ -17,6 +17,7 @@ cc.Class({
         characterController: CharacterController,
         zombieContainer: cc.Node,
         itemsContainer: cc.Node,
+        groundContainer: cc.Node,
         zombiePrefab: cc.Prefab,
         knifePrefab: cc.Prefab,
         swordPrefab: cc.Prefab,
@@ -43,9 +44,6 @@ cc.Class({
 
         this.score = 0;
         this.createKnife();
-        this.createEnemyCallback = () => {
-            this.createEnemy();
-        }
         this.scheduleOnce(() => {
             this.createSpike();
         }, 10);
@@ -140,9 +138,11 @@ cc.Class({
     },
 
     createEnemy () {
-        this.unschedule(this.createEnemyCallback);
-        this.scheduleOnce(this.createEnemyCallback, this.enemyInterval);
-        
+        const createEnemyCallback = ()=> {
+            this.createEnemy();
+        }
+        this.scheduleOnce(createEnemyCallback, this.enemyInterval);
+
         if (this.score < 30 && this.enemyAmount > 2) {
             return;
         }
@@ -155,16 +155,17 @@ cc.Class({
         this.enemy.x = (Math.random() * cc.view.getVisibleSize().width - cc.view.getVisibleSize().width / 2) * 0.8;
         this.enemy.y = 500;
         this.zombieContainer.addChild(this.enemy);
-        this.enemy.getComponent('EnemyCtrl').fallDown();
+        this.enemy.getComponent(EnemyController).fallDown();
+        this.enemy.getComponent(EnemyController).setGroundContainer(this.groundContainer);
         this.enemy.on('die', () => {
             this.enemyAmount --;
+            this.unschedule(createEnemyCallback);
             this.createEnemy();
             this.increaseScore();
         });
     },
 
     createKnife () {
-        cc.log('knife');
         this.scheduleOnce(() => {
             this.createKnife();
         }, 6);
