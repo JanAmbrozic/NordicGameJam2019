@@ -229,9 +229,10 @@ cc.Class({
     fadeScene () {
         this.state = State.TRANSITION;
         this.animation.play('close');
+        this.againLabel.node.opacity = 1;
         this.scheduleOnce(() => {
             this.againLabel.node.runAction(cc.sequence(
-                cc.fadeIn(1),
+                cc.fadeTo(1, 255),
                 cc.callFunc(() => {
                     this.state = State.RESTART;
             })));

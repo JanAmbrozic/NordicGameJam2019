@@ -111,6 +111,7 @@ cc.Class({
         this.state = State.DEAD;
         this.zombieCollider.enabled = false;
         this.zombieMoan.play();
+        this.zombieIdleAudio.stop();
     },
 
     idle() {
