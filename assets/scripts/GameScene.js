@@ -26,7 +26,9 @@ cc.Class({
     },
 
     start () {
-        this.enemyInterval = 5;
+        this.enemyInterval = 8;
+        this.enemyAmount = 0;
+
         this.state = State.GAME;
         var manager = cc.director.getCollisionManager();
         manager.enabled = true;
@@ -41,6 +43,9 @@ cc.Class({
 
         this.score = 0;
         this.createKnife();
+        this.createEnemyCallback = () => {
+            this.createEnemy();
+        }
         this.scheduleOnce(() => {
             this.createSpike();
         }, 10);
@@ -123,6 +128,9 @@ cc.Class({
                 this.characterController.jump();
                 break;
             case cc.macro.KEY.space:
+                this.characterController.attackSword();
+                break;
+            case cc.macro.KEY.enter:
                 this.characterController.attack();
                 break;
             case cc.macro.MOUSE_DOWN:
@@ -137,14 +145,24 @@ cc.Class({
     },
 
     createEnemy () {
-        this.unschedule(this.createEnemy);
-        this.scheduleOnce(this.createEnemy, this.enemyInterval);
+        this.unschedule(this.createEnemyCallback);
+        this.scheduleOnce(this.createEnemyCallback, this.enemyInterval);
+        
+        if (this.score < 30 && this.enemyAmount > 2) {
+            return;
+        }
+        if (this.score < 40 && this.enemyAmount > 3) {
+            return;
+        }
+        this.enemyAmount ++;
 
         this.enemy = cc.instantiate(this.zombiePrefab);
-        this.enemy.x = this._getRandomPosition();
+        this.enemy.x = (Math.random() * cc.view.getVisibleSize().width - cc.view.getVisibleSize().width / 2) * 0.8;
+        this.enemy.y = 500;
         this.zombieContainer.addChild(this.enemy);
         this.enemy.getComponent('EnemyCtrl').fallDown();
         this.enemy.on('die', () => {
+            this.enemyAmount --;
             this.createEnemy();
             this.increaseScore();
         });
@@ -182,7 +200,7 @@ cc.Class({
         spike.x = this._getRandomPosition();
         spike.y = -150;
         this.itemsContainer.addChild(spike);
-        spike.runAction(cc.moveBy(0.5, 0, 100));
+        spike.runAction(cc.moveBy(0.2, 0, 100));
 
         this.scheduleOnce(() => {
             spike.runAction(cc.sequence(
@@ -197,7 +215,7 @@ cc.Class({
     _getRandomPosition () {
         while(true) {
             let x = (Math.random() * cc.view.getVisibleSize().width - cc.view.getVisibleSize().width / 2) * 0.8;
-            if (Math.abs(this.characterController.container.x - x) > 300) {
+            if (Math.abs(this.characterController.container.x - x) > 400) {
                 return x;
             }
         }

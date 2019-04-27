@@ -104,6 +104,16 @@ cc.Class({
         }
     },
 
+    attackSword () {
+        if (this.state === State.DEAD) {
+            return;
+        }
+        if (this.isAttack || this.isJumping) {
+            return;
+        }
+        this._attackSword();
+    },
+
     attack () {
         if (this.state === State.DEAD) {
             return;
@@ -113,8 +123,6 @@ cc.Class({
         }
         if (this.knivesList.length > 0) {
             this._attackKnife();
-        } else if (this.hasSword){
-            this._attackSword();
         }
     },
 
