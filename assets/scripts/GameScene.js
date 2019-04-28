@@ -235,6 +235,7 @@ cc.Class({
     },
 
     fadeScene () {
+        cc.audioEngine.stopAllEffects();
         this.state = State.TRANSITION;
         this.animation.play('close');
         this.againLabel.node.opacity = 1;

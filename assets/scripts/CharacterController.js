@@ -14,16 +14,29 @@ cc.Class({
         characterSprite: cc.Sprite,
         swordCollider: cc.Collider,
         animation: cc.Animation,
-        swooshAudio: cc.AudioSource,
-        hiyaAudio: cc.AudioSource
+
+        knifeSfx: {
+            type: cc.AudioClip,
+            default: null
+        },
+        swordSfx: {
+            type: cc.AudioClip,
+            default: null
+        },
+        jumpSfx: {
+            type: cc.AudioClip,
+            default: null
+        },
+        dieSfx: {
+            type: cc.AudioClip,
+            default: null
+        }
     },
 
     start () {
         this.isJumping = false;
         this.isRightDirection = true;
-        this.knifeAmount = 0;
         this.knivesList = [];
-        this.hasSword = true;
 
         this.screenWidth = cc.view.getVisibleSize().width;
         this.speed = 1400;
@@ -81,6 +94,7 @@ cc.Class({
         if ( this.state === State.DEAD) {
             return;
         }
+        cc.audioEngine.playEffect(this.dieSfx);
         this.node.emit('die');
         this._changeState(State.DEAD);
     },
@@ -92,15 +106,26 @@ cc.Class({
         if (this.isAttack || this.isJumping) {
             return;
         }
+        cc.audioEngine.playEffect(this.jumpSfx);
         this.isJumping = true;
         this.animation.play('jump');
-        //this.hiyaAudio.play();
     },
 
     _attackSword () {
         if (this.state === State.IDLE || this.state === State.RUN) {
+            cc.audioEngine.playEffect(this.swordSfx);
             this.isAttack = true;
             this.animation.play('hit');
+        }
+    },
+
+    _attackKnife () {
+        if (this.state === State.IDLE || this.state === State.RUN) {
+            cc.audioEngine.playEffect(this.knifeSfx);
+            this.knife = this.knivesList.shift();
+            this.node.emit('updateKnife', this.knivesList.length);
+            this.isAttack = true;
+            this.animation.play('throw');
         }
     },
 
@@ -141,16 +166,6 @@ cc.Class({
     _getSword (swordNode) {
         swordNode.destroy();
         this.hasSword = true;
-    },
-
-    _attackKnife () {
-        if (this.state === State.IDLE || this.state === State.RUN) {
-            this.knife = this.knivesList.shift();
-            this.node.emit('updateKnife', this.knivesList.length);
-            this.isAttack = true;
-            this.animation.play('throw');
-            this.hiyaAudio.play();
-        }
     },
 
     update (dt) {
@@ -203,7 +218,6 @@ cc.Class({
     onSword () {
         this.swordCollider.node.active = true;
         this.swordCollider.enabled = true;
-        this.swooshAudio.play();
     },
 
     _changeState (state) {
