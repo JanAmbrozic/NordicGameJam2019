@@ -238,6 +238,8 @@ cc.Class({
                 break;
             case State.DEAD:
                 if (!this.isJumping) {
+                    this.swordCollider.node.active = false;
+                    this.swordCollider.enabled = false;
                     this.animation.play('dead');
                 }
                 break;

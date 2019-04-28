@@ -241,6 +241,8 @@ cc.Class({
     },
 
     fadeScene () {
+        this.unscheduleAllCallbacks();
+
         cc.audioEngine.stopAllEffects();
         this.state = State.TRANSITION;
         this.animation.play('close');
@@ -262,13 +264,6 @@ cc.Class({
     increaseScore () {
         this.score ++;
         this.scoreLabel.string = 'x' + this.score;
-        if (this.score > 5) {
-            this.enemyInterval = 4;
-        } else if (this.score > 10) {
-            this.enemyInterval = 3;
-        }else if (this.score > 15) {
-            this.enemyInterval = 2;
-        }
     },
 
     increaseKnives (amount) {
