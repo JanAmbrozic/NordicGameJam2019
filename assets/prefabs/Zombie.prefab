@@ -38,13 +38,10 @@
       },
       {
         "__id__": 11
-      },
-      {
-        "__id__": 12
       }
     ],
     "_prefab": {
-      "__id__": 13
+      "__id__": 12
     },
     "_opacity": 255,
     "_color": {
@@ -325,12 +322,28 @@
     "zombieCollider": {
       "__id__": 10
     },
-    "zombieMoan": {
-      "__id__": 11
-    },
-    "zombieIdleAudio": {
-      "__id__": 3
-    },
+    "idleSfx": [
+      {
+        "__uuid__": "c15f486e-47c8-42eb-bb90-141f301bad1b"
+      },
+      {
+        "__uuid__": "07b9ed6d-321c-45e6-b81e-03cf2f12d61e"
+      },
+      {
+        "__uuid__": "77242a7c-c5b9-482a-92cc-4df999677366"
+      }
+    ],
+    "dieSfx": [
+      {
+        "__uuid__": "926cfb61-d3de-4b39-af44-47b046dda0b1"
+      },
+      {
+        "__uuid__": "7b7a2c53-eaf3-48c3-b88e-04cefa53c494"
+      },
+      {
+        "__uuid__": "90877c8e-0217-4e58-a5fc-74e247eab41f"
+      }
+    ],
     "_id": ""
   },
   {
@@ -352,24 +365,6 @@
       "width": 282,
       "height": 458
     },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.AudioSource",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "_clip": {
-      "__uuid__": "8365f4df-7020-4058-af3c-f5b02ea52c7e"
-    },
-    "_volume": 1,
-    "_mute": false,
-    "_loop": false,
-    "playOnLoad": false,
-    "preload": false,
     "_id": ""
   },
   {

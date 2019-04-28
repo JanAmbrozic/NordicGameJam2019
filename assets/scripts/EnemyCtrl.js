@@ -15,16 +15,22 @@ cc.Class({
         zombieAnim: cc.Animation,
         zombieNode: cc.Node,
         zombieCollider: cc.Collider,
-        zombieMoan: cc.AudioSource,
-        zombieIdleAudio: cc.AudioSource
+        idleSfx: {
+            type: cc.AudioClip,
+            default: []
+        },
+        dieSfx: {
+            type: cc.AudioClip,
+            default: []
+        }
     },
 
     start () {
         this.wiggleRoom = 250;
         this.fallingSpeed = 1000;
         this.playerNode = cc.find('Canvas/CharacterContainer');
-        this.zombieIdleAudio.loop = true;
-        this.zombieIdleAudio.play();
+
+        this.idleSfxId = cc.audioEngine.playEffect(this.idleSfx[Math.floor(Math.random() * (this.idleSfx.length - 1))], true);
     },
 
     setSpeed (speed) {
@@ -114,14 +120,15 @@ cc.Class({
             this.zombieNode.anchorX = 0;
             this.zombieNode.x = this.zombieNode.x - (150 * this.zombieNode.scaleX);
         }
+
         this.node.emit('die');
         this.node.getComponent(BloodController).play(this.groundContainer,
             this.getNodeMiddle() , -this.zombieNode.scaleX)
         this.zombieAnim.play('ZombieDead');
         this.state = State.DEAD;
         this.zombieCollider.enabled = false;
-        this.zombieMoan.play();
-        this.zombieIdleAudio.stop();
+        cc.audioEngine.stopEffect(this.idleSfxId);
+        cc.audioEngine.playEffect(this.dieSfx[Math.floor(Math.random() * (this.dieSfx.length - 1))], false);
     },
 
     getNodeMiddle() {
