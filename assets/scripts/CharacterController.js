@@ -56,6 +56,9 @@ cc.Class({
             case 2:
                 this._getSword(other.node);
                 break;
+            case 4:
+                this._getKnife(other.node);
+                break;
         }
     },
 

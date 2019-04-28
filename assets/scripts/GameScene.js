@@ -22,6 +22,7 @@ cc.Class({
         groundContainer: cc.Node,
         zombiePrefab: cc.Prefab,
         knifePrefab: cc.Prefab,
+        knifePackPrefab: cc.Prefab,
         swordPrefab: cc.Prefab,
         spikePrefab: cc.Prefab,
         gameNode: cc.Node,
@@ -187,7 +188,12 @@ cc.Class({
             this.createKnife();
         }, 6);
 
-        const knife = cc.instantiate(this.knifePrefab);
+        let knife;
+        if (Math.random() < 0.2) {
+            knife = cc.instantiate(this.knifePackPrefab);
+        } else {
+            knife = cc.instantiate(this.knifePrefab);
+        }
         knife.x = this._getRandomPosition();
         knife.y = Math.random() * cc.view.getVisibleSize().height * 0.5 ;
         this.itemsContainer.addChild(knife);
