@@ -20,8 +20,6 @@ cc.Class({
     },
 
     start () {
-        //this.zombieAnim.play('ZombieIdle');
-        this.speed = 500;
         this.wiggleRoom = 250;
         this.fallingSpeed = 1000;
         this.playerNode = cc.find('Canvas/CharacterContainer');
@@ -30,7 +28,7 @@ cc.Class({
     },
 
     setSpeed (speed) {
-        this.speed = speed;
+        this.speed = speed + Math.random() * 100 - 50;
     },
 
     onCollisionEnter (collidedNode) {
